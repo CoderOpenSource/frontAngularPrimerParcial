@@ -1,0 +1,77 @@
+<div class="flex h-screen flex-col md:flex-row">
+  <!-- Encabezado: Logo SmartCart arriba izquierda -->
+  <div class="w-full md:w-1/2 bg-white px-4 py-6 flex flex-col">
+    <!-- Logo arriba -->
+    <div class="flex items-center mb-8 px-4">
+      <img src="https://res.cloudinary.com/dkpuiyovk/image/upload/v1744152864/logo_xpkefy.png"
+           alt="SmartCart Logo"
+           class="w-14 h-14 mr-3"> <!-- Tamaño más grande -->
+      <h1 class="text-2xl font-bold text-gray-800">SmartCart</h1>
+    </div>
+
+    <!-- Contenedor centrado del formulario -->
+    <div class="flex flex-grow items-center justify-center">
+      <form class="bg-gray-900 text-white rounded-xl shadow-lg px-8 py-6 w-full max-w-md"
+            (ngSubmit)="onSubmit()"
+            #loginForm="ngForm">
+        <!-- Título de inicio de sesión -->
+        <div class="mb-6 text-center">
+          <h2 class="text-2xl font-bold">Iniciar sesión</h2>
+          <p class="text-sm text-gray-400 mt-1">Accede con tu cuenta asignada por el administrador.</p>
+        </div>
+
+        <!-- Campo: Correo -->
+        <div class="mb-4">
+          <label class="block text-sm mb-1" for="email">Correo electrónico</label>
+          <div class="relative">
+            <input id="email" type="email" placeholder="admin.smartcar@gmail.com"
+                   class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                   [(ngModel)]="email" name="email" required>
+            <span class="absolute inset-y-0 right-3 flex items-center text-gray-400">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Campo: Contraseña -->
+        <div class="mb-4">
+          <label class="block text-sm mb-1" for="password">Contraseña</label>
+          <div class="relative">
+            <input [type]="showPassword ? 'text' : 'password'" id="password" placeholder="********"
+                   class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                   [(ngModel)]="password" name="password" required>
+            <button type="button" class="absolute inset-y-0 right-3 text-gray-400" (click)="togglePasswordVisibility()">
+              <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Enlace: Olvidaste tu contraseña -->
+        <div class="mb-4 text-right">
+          <a href="#" class="text-sm text-purple-400 hover:underline">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <!-- Botón: Iniciar sesión -->
+        <button type="submit"
+                class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+          Iniciar sesión
+        </button>
+
+        <!-- Error -->
+        <div *ngIf="error" class="text-red-400 text-sm mt-4">{{ error }}</div>
+
+        <!-- Toast -->
+        <div *ngIf="toastMessage" class="fixed bottom-0 right-0 m-6 p-3 rounded shadow-lg" [ngClass]="toastClass">
+          {{ toastMessage }}
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lado derecho: Imagen ilustrativa -->
+  <div class="hidden md:flex w-full md:w-1/2 h-full">
+    <img src="https://res.cloudinary.com/dkpuiyovk/image/upload/v1744152534/ChatGPT_Image_5_abr_2025_11_38_16_htmkop.png"
+         alt="SmartCar Illustration"
+         class="object-cover w-full h-full" />
+  </div>
+</div>

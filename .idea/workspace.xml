@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="be46b2bd-898c-47b6-9d54-3099f4f7b63a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.angular/cache/17.3.8/zorro-ng/.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/17.3.8/zorro-ng/.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/3rdpartylicenses.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dist/zorro-ng/3rdpartylicenses.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-3S7CEAAX.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-5RMCECNB.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-7LXW4TL2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-7MWRMGTP.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-BTD7GRPP.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-FE2X3YWO.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-GVZIDT43.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-IG4KVHXC.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-JJRMTXSM.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-JQUYNI7D.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-KIGKIRQM.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-PBXGP652.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-QOY2IDPY.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-RC5Y4Y6D.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-S2FIFX4V.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-SV43ND72.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-URKZM2SF.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-UYZNA7OL.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-VQFNXLW7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-Y3Z6YCWI.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-ZBLQCJ4V.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-ZJB3KW6E.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/zorro-ng/browser/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/main-XI2P2JO4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="tsconfig.json" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2p2A8QbsUWtDCY5QuDDHSUTcBsD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/aliss/OneDrive/Escritorio/archivos/segundoParcialFrontEnd&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\aliss\\OneDrive\\Escritorio\\archivos\\segundoParcialFrontEnd\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="npm.Angular CLI Server">
+    <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
+      <method v="2" />
+    </configuration>
+    <configuration name="Angular CLI Server" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-WS-242.21829.149" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="be46b2bd-898c-47b6-9d54-3099f4f7b63a" name="Changes" comment="" />
+      <created>1731953637647</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731953637647</updated>
+      <workItem from="1731953639487" duration="4984000" />
+      <workItem from="1732011191072" duration="1225000" />
+      <workItem from="1732041422928" duration="130000" />
+      <workItem from="1744150880394" duration="5788000" />
+      <workItem from="1744220852813" duration="3265000" />
+      <workItem from="1744311912250" duration="2507000" />
+      <workItem from="1744379818996" duration="8317000" />
+      <workItem from="1744403063294" duration="4985000" />
+      <workItem from="1744451477273" duration="2258000" />
+      <workItem from="1744462268563" duration="22558000" />
+      <workItem from="1744538232051" duration="25000" />
+      <workItem from="1744594050115" duration="364000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

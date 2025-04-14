@@ -1,0 +1,45 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4 text-center">Gestión de Reportes</h1>
+
+  <div class="mb-4 text-right">
+    <button class="bg-green-500 text-white px-4 py-2 rounded" (click)="generarReporte()">
+      Generar Reporte
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="!isLoading && reportes.length === 0" class="text-center text-gray-600">
+    No hay reportes disponibles.
+  </div>
+
+  <table *ngIf="!isLoading && reportes.length > 0" class="table-auto w-full border-collapse">
+    <thead>
+    <tr class="bg-gray-200">
+      <th class="border px-4 py-2">ID</th>
+      <th class="border px-4 py-2">Título</th>
+      <th class="border px-4 py-2">Tipo</th>
+      <th class="border px-4 py-2">Fecha de Generación</th>
+      <th class="border px-4 py-2">Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let reporte of reportes">
+      <td class="border px-4 py-2">{{ reporte.id }}</td>
+      <td class="border px-4 py-2">{{ reporte.titulo }}</td>
+      <td class="border px-4 py-2">{{ reporte.tipo }}</td>
+      <td class="border px-4 py-2">{{ reporte.fechaGeneracion }}</td>
+      <td class="border px-4 py-2">
+        <button class="bg-blue-500 text-white px-2 py-1 rounded" (click)="descargarReporte(reporte)">
+          Ver
+        </button>
+        <button class="bg-red-500 text-white px-2 py-1 rounded" (click)="eliminarReporte(reporte.id)">
+          Eliminar
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

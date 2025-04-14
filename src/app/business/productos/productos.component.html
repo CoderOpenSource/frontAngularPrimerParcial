@@ -1,0 +1,188 @@
+<!-- Spinner -->
+<div *ngIf="isLoading" class="spinner-container">
+  <div class="spinner"></div>
+</div>
+
+<!-- Contenido -->
+<div *ngIf="!isLoading" class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-gray-800 mb-4">Gestionar Productos</h1>
+
+  <!-- Controles superiores -->
+  <div class="flex justify-between items-center mb-6 flex-wrap gap-4">
+    <div class="flex-shrink-0">
+      <button
+        (click)="addProducto()"
+        class="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg shadow-md transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="white" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        Añadir Producto
+      </button>
+    </div>
+
+    <div class="w-full sm:w-auto sm:ml-auto">
+      <input
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="filterProductos()"
+        type="text"
+        placeholder="Buscar por nombre..."
+        class="w-full sm:w-72 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500"
+      />
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white rounded-lg shadow text-sm">
+      <thead class="bg-gray-800 text-white">
+      <tr>
+        <th class="p-3">Nombre</th>
+        <th class="p-3">Código</th>
+        <th class="p-3">Precio</th>
+        <th class="p-3">Unidad</th>
+        <th class="p-3">Subcategoría</th>
+        <th class="p-3">Estado</th>
+        <th class="p-3 text-center">Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let producto of paginatedProductos()" class="hover:bg-gray-50 border-b">
+        <td class="p-3">{{ producto.nombre }}</td>
+        <td class="p-3">{{ producto.codigo_barra }}</td>
+        <td class="p-3">Bs {{ producto.precio_unitario }}</td>
+        <td class="p-3">{{ producto.unidad_medida }}</td>
+        <td class="p-3">{{ getSubcategoriaNombre(producto.subcategoria) }}</td>
+        <td class="p-3">{{ producto.estado ? 'Activo' : 'Inactivo' }}</td>
+        <td class="p-3 text-center space-x-2">
+          <button (click)="abrirImagenesModal(producto)" class="text-indigo-500 hover:text-indigo-700 flex items-center gap-1">
+            🖼️ <span>Imágenes</span>
+          </button>
+          <button (click)="editProducto(producto)" class="text-blue-500 hover:text-blue-700 flex items-center gap-1">
+            ✏️ <span>Editar</span>
+          </button>
+          <button (click)="deleteProducto(producto.id)" class="text-red-500 hover:text-red-700 flex items-center gap-1">
+            🗑️ <span>Eliminar</span>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginación -->
+  <div class="mt-6 flex justify-end items-center gap-2">
+    <button (click)="prevPage()" [disabled]="currentPage === 1" class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50">Anterior</button>
+    <span class="text-sm font-medium text-gray-700">Página {{ currentPage }} de {{ totalPages() }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages()" class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-50">Siguiente</button>
+  </div>
+
+  <!-- Modal de creación/edición -->
+  <div *ngIf="showModal" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white text-black w-full max-w-3xl p-8 rounded-xl shadow-xl relative overflow-y-auto max-h-[90vh]">
+      <h2 class="text-2xl font-bold mb-6 text-center text-purple-600">
+        {{ isEditMode ? '✏️ Editar Producto' : '➕ Nuevo Producto' }}
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Columna izquierda -->
+        <div class="space-y-4">
+          <label class="block font-bold mb-1">📛 Nombre</label>
+          <input [(ngModel)]="selectedProducto.nombre" class="w-full px-3 py-2 border rounded-lg bg-gray-100" />
+
+          <label class="block font-bold mb-1">📦 Código de barra</label>
+          <input [(ngModel)]="selectedProducto.codigo_barra" class="w-full px-3 py-2 border rounded-lg bg-gray-100" />
+
+          <label class="block font-bold mb-1">💲 Precio Unitario</label>
+          <input [(ngModel)]="selectedProducto.precio_unitario" type="number" class="w-full px-3 py-2 border rounded-lg bg-gray-100" />
+
+          <label class="block font-bold mb-1">📐 Unidad de medida</label>
+          <input [(ngModel)]="selectedProducto.unidad_medida" class="w-full px-3 py-2 border rounded-lg bg-gray-100" />
+
+          <label class="block font-bold mb-1">📝 Descripción</label>
+          <textarea [(ngModel)]="selectedProducto.descripcion" rows="3" class="w-full px-3 py-2 border rounded-lg bg-gray-100"></textarea>
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="space-y-4">
+          <label class="block font-bold mb-1">📂 Subcategoría</label>
+          <select [(ngModel)]="selectedProducto.subcategoria" class="w-full px-3 py-2 border rounded-lg bg-gray-100">
+            <option [ngValue]="null" disabled>Seleccione una subcategoría...</option>
+            <option *ngFor="let sub of subcategorias" [ngValue]="sub.id">{{ sub.nombre }}</option>
+          </select>
+
+          <div class="flex items-center gap-2">
+            <input type="checkbox" [(ngModel)]="selectedProducto.estado" disabled />
+            <label>Activo</label>
+          </div>
+
+          <label class="block font-bold mb-1">🖼️ Imágenes</label>
+          <input #fileInput type="file" multiple (change)="onFileSelected($event)"
+                 class="w-full px-3 py-2 rounded-lg border border-purple-300 bg-white text-black" />
+
+          <!-- Imágenes existentes -->
+          <div class="grid grid-cols-3 gap-3 mt-3">
+            <ng-container *ngFor="let img of imagenes">
+              <div *ngIf="!img.imagen" class="relative group">
+                <img [src]="img.previewUrl" class="rounded-lg w-full h-28 object-cover border" />
+                <button (click)="marcarImagenParaEliminar(img)"
+                        class="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 text-xs hidden group-hover:block"
+                        type="button">
+                  ✖
+                </button>
+              </div>
+            </ng-container>
+          </div>
+
+          <!-- Nuevas imágenes -->
+          <div class="grid grid-cols-3 gap-3 mt-3">
+            <ng-container *ngFor="let img of imagenes">
+              <div *ngIf="img.imagen" class="relative group">
+                <img [src]="img.previewUrl" class="rounded-lg w-full h-28 object-cover border" />
+                <button (click)="removeNewImage(img)"
+                        class="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 text-xs hidden group-hover:block"
+                        type="button">
+                  ✖
+                </button>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="mt-6 flex justify-between">
+        <button (click)="saveProducto()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg shadow">
+          {{ isEditMode ? '💾 Actualizar' : '✅ Guardar' }}
+        </button>
+        <button (click)="closeModal()" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg shadow">
+          ❌ Cancelar
+        </button>
+      </div>
+
+      <!-- Spinner overlay -->
+      <div *ngIf="isSaving" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 rounded-xl">
+        <div class="w-12 h-12 border-4 border-white border-t-purple-500 rounded-full animate-spin"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para ver imágenes del producto -->
+  <div *ngIf="showImagenesModal" class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white text-black w-full max-w-3xl p-6 rounded-xl shadow-xl relative overflow-y-auto max-h-[90vh]">
+      <h2 class="text-2xl font-bold text-center text-purple-600 mb-4">🖼️ Imágenes del Producto</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div *ngFor="let img of imagenesProductoModal" class="relative border rounded-lg overflow-hidden shadow">
+          <img [src]="img.previewUrl" class="w-full h-40 object-cover" />
+          <p class="text-sm p-2 text-gray-700 truncate text-center">
+            {{ img.descripcion || 'Sin descripción' }}
+          </p>
+        </div>
+      </div>
+      <div class="mt-6 text-center">
+        <button (click)="cerrarImagenesModal()" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg shadow">
+          ❌ Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

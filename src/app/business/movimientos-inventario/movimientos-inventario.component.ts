@@ -89,8 +89,15 @@ export class MovimientoInventarioComponent implements OnInit {
   }
 
   loadProductos() {
-    this.http.get<Producto[]>('http://127.0.0.1:8000/api/productos/').subscribe(data => this.productos = data);
+    this.http.get<any>('http://127.0.0.1:8000/api/productos/?sin_stock=all&limit=100').subscribe({
+      next: data => {
+        this.productos = data.results;
+      },
+      error: err => this.handleHttpError(err)
+    });
   }
+
+
 
   loadCategorias() {
     this.http.get<Categoria[]>('http://127.0.0.1:8000/api/categorias/').subscribe(data => this.categorias = data);

@@ -5,38 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be46b2bd-898c-47b6-9d54-3099f4f7b63a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.angular/cache/17.3.8/zorro-ng/.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/17.3.8/zorro-ng/.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/18.2.12/zorro-ng/.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/18.2.12/zorro-ng/.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/3rdpartylicenses.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dist/zorro-ng/3rdpartylicenses.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-3S7CEAAX.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-5RMCECNB.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-7LXW4TL2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-7MWRMGTP.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-BTD7GRPP.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-FE2X3YWO.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-GVZIDT43.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-IG4KVHXC.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-JJRMTXSM.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-JQUYNI7D.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-KIGKIRQM.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-PBXGP652.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-QOY2IDPY.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-RC5Y4Y6D.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-S2FIFX4V.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-SV43ND72.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-URKZM2SF.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-UYZNA7OL.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-VQFNXLW7.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-Y3Z6YCWI.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-ZBLQCJ4V.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/chunk-ZJB3KW6E.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/zorro-ng/browser/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/zorro-ng/browser/main-XI2P2JO4.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/business/movimientos-inventario/movimientos-inventario.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/business/movimientos-inventario/movimientos-inventario.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/business/productos/productos.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/business/productos/productos.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/business/productos/productos.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/business/productos/productos.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/business/reportes.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/business/reportes.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/business/reportes.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/business/reportes.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/business/stock/stock.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/business/stock/stock.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/business/stock/stock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/business/stock/stock.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/business/subcategorias/subcategorias.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/business/subcategorias/subcategorias.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/components/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/components/sidebar/sidebar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/components/sidebar/sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/components/sidebar/sidebar.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,10 +58,16 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\aliss\\OneDrive\\Escritorio\\archivos\\segundoParcialFrontEnd\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\aliss\OneDrive\Escritorio\archivos\segundoParcialFrontEnd\src\app\business" />
+    </key>
+  </component>
   <component name="RunManager" selected="npm.Angular CLI Server">
     <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
       <method v="2" />
@@ -119,7 +109,19 @@
       <workItem from="1744451477273" duration="2258000" />
       <workItem from="1744462268563" duration="22558000" />
       <workItem from="1744538232051" duration="25000" />
-      <workItem from="1744594050115" duration="364000" />
+      <workItem from="1744594050115" duration="1052000" />
+      <workItem from="1744922618301" duration="10201000" />
+      <workItem from="1744982169583" duration="14498000" />
+      <workItem from="1745016337498" duration="1632000" />
+      <workItem from="1745025409052" duration="2000" />
+      <workItem from="1745055200919" duration="2652000" />
+      <workItem from="1745070634220" duration="17983000" />
+      <workItem from="1745132949284" duration="13000000" />
+      <workItem from="1745156688756" duration="96000" />
+      <workItem from="1745173150435" duration="3097000" />
+      <workItem from="1745180149301" duration="688000" />
+      <workItem from="1745184024526" duration="1234000" />
+      <workItem from="1745196115065" duration="5591000" />
     </task>
     <servers />
   </component>

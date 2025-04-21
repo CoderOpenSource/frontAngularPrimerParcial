@@ -7,13 +7,13 @@ import Swal from 'sweetalert2';
 interface Producto {
   id: number;
   nombre: string;
-  subcategoria: number;
+  subcategoria: number | Subcategoria;
 }
 
 interface Subcategoria {
   id: number;
   nombre: string;
-  categoria: number;
+  categoria: number | Categoria;
 }
 
 interface Categoria {
@@ -38,7 +38,8 @@ interface Stock {
 })
 export class StockComponent implements OnInit {
   stocks: Stock[] = [];
-  productos: Producto[] = [];
+  productosConStock: Producto[] = [];
+  productosSinStock: Producto[] = [];
   subcategorias: Subcategoria[] = [];
   categorias: Categoria[] = [];
 
@@ -59,11 +60,17 @@ export class StockComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 5;
 
+  productosPage = 1;
+  totalProductos = 0;
+  hasNextProductosPage = false;
+  hasPrevProductosPage = false;
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.loadStocks();
-    this.loadProductos();
+    this.loadProductosTodos();
+    this.loadProductosSinStock();
     this.loadCategorias();
     this.loadSubcategorias();
   }
@@ -92,9 +99,29 @@ export class StockComponent implements OnInit {
     });
   }
 
-  loadProductos() {
-    this.http.get<Producto[]>('http://127.0.0.1:8000/api/productos/').subscribe(data => this.productos = data);
+  loadProductosSinStock(page: number = 1) {
+    this.http.get<any>(`http://127.0.0.1:8000/api/productos/?sin_stock=1&page=${page}`).subscribe({
+      next: data => {
+        this.productosSinStock = data.results;
+        this.totalProductos = data.count;
+        this.hasNextProductosPage = !!data.next;
+        this.hasPrevProductosPage = !!data.previous;
+        this.productosPage = page;
+      },
+      error: err => this.handleHttpError(err)
+    });
   }
+
+  loadProductosTodos(page: number = 1) {
+    this.http.get<any>(`http://127.0.0.1:8000/api/productos/?sin_stock=all&page=${page}`).subscribe({
+      next: data => {
+        this.productosConStock = data.results;
+        this.filterStocks(); // actualiza tabla con todos los productos
+      },
+      error: err => this.handleHttpError(err)
+    });
+  }
+
 
   loadCategorias() {
     this.http.get<Categoria[]>('http://127.0.0.1:8000/api/categorias/').subscribe(data => this.categorias = data);
@@ -104,57 +131,56 @@ export class StockComponent implements OnInit {
     this.http.get<Subcategoria[]>('http://127.0.0.1:8000/api/subcategorias/').subscribe(data => this.subcategorias = data);
   }
 
-  getSubcategoriaById(id: number): Subcategoria | undefined {
-    return this.subcategorias.find(s => s.id === id);
-  }
-
-  getCategoriaById(id: number): Categoria | undefined {
-    return this.categorias.find(c => c.id === id);
-  }
-
-  getSubcategoriasFiltradas(): Subcategoria[] {
-    return this.subcategorias.filter(s =>
-      !this.categoriaSeleccionada || s.categoria === this.categoriaSeleccionada
-    );
-  }
-
   getNombreProducto(id: number): string {
-    const prod = this.productos.find(p => p.id === id);
+    const prod = this.productosConStock.find(p => p.id === id);
     return prod ? prod.nombre : 'Producto no encontrado';
   }
 
   getNombreSubcategoriaDesdeProducto(productoId: number): string {
-    const producto = this.productos.find(p => p.id === productoId);
-    const sub = this.subcategorias.find(s => s.id === producto?.subcategoria);
+    const producto = this.productosConStock.find(p => p.id === productoId);
+    const subId = typeof producto?.subcategoria === 'object' ? producto.subcategoria.id : producto?.subcategoria;
+    const sub = this.subcategorias.find(s => s.id === subId);
     return sub ? sub.nombre : '—';
   }
 
   getNombreCategoriaDesdeProducto(productoId: number): string {
-    const producto = this.productos.find(p => p.id === productoId);
-    const sub = this.subcategorias.find(s => s.id === producto?.subcategoria);
-    const cat = this.categorias.find(c => c.id === sub?.categoria);
+    const producto = this.productosConStock.find(p => p.id === productoId);
+    const subId = typeof producto?.subcategoria === 'object' ? producto.subcategoria.id : producto?.subcategoria;
+    const sub = this.subcategorias.find(s => s.id === subId);
+    const catId = typeof sub?.categoria === 'object' ? sub.categoria.id : sub?.categoria;
+    const cat = this.categorias.find(c => c.id === catId);
     return cat ? cat.nombre : '—';
+  }
+
+  getSubcategoriasFiltradas(): Subcategoria[] {
+    return this.subcategorias.filter(s => !this.categoriaSeleccionada || s.categoria === this.categoriaSeleccionada);
   }
 
   getProductosFiltradosPorNombre(): Producto[] {
     const term = this.productoBuscado.toLowerCase();
-    return this.productos.filter(p => p.nombre.toLowerCase().includes(term));
+    return this.productosSinStock.filter(p => p.nombre.toLowerCase().includes(term));
   }
+
 
   selectProducto(id: number) {
     this.selectedStock.producto = id;
-    const producto = this.productos.find(p => p.id === id);
+    const producto = this.productosSinStock.find(p => p.id === id);
     this.productoBuscado = producto?.nombre || '';
     this.mostrarListaProductos = false;
   }
 
+
   filterStocks() {
     this.filteredStocks = this.stocks.filter(stock => {
-      const producto = this.productos.find(p => p.id === stock.producto);
-      const sub = this.subcategorias.find(s => s.id === producto?.subcategoria);
-      const catMatch = !this.categoriaSeleccionada || sub?.categoria === this.categoriaSeleccionada;
+      const producto = this.productosConStock.find(p => p.id === stock.producto);
+      const subId = typeof producto?.subcategoria === 'object' ? producto.subcategoria.id : producto?.subcategoria;
+      const sub = this.subcategorias.find(s => s.id === subId);
+      const catId = typeof sub?.categoria === 'object' ? sub.categoria.id : sub?.categoria;
+
+      const catMatch = !this.categoriaSeleccionada || catId === this.categoriaSeleccionada;
       const subMatch = !this.subcategoriaSeleccionada || sub?.id === this.subcategoriaSeleccionada;
       const textMatch = this.searchTerm.trim() === '' || producto?.nombre.toLowerCase().includes(this.searchTerm.toLowerCase());
+
       return catMatch && subMatch && textMatch;
     });
     this.currentPage = 1;
@@ -182,6 +208,7 @@ export class StockComponent implements OnInit {
     this.productoBuscado = '';
     this.mostrarListaProductos = true;
     this.showModal = true;
+    this.loadProductosSinStock();
   }
 
   closeModal() {

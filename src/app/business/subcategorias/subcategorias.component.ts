@@ -14,7 +14,7 @@ interface Subcategoria {
   nombre: string;
   descripcion: string | null;
   estado: boolean;
-  categoria: number | null;
+  categoria: number | Categoria | null;
   foto_perfil: string | null;        // Para envío
   foto_perfil_url: string | null;    // Para mostrar imagen
 }
@@ -101,12 +101,15 @@ export class SubcategoriasComponent implements OnInit {
     return Math.ceil(this.filteredSubcategorias.length / this.itemsPerPage);
   }
 
-  getCategoriaNombre(categoriaId: number | null): string {
-    if (categoriaId === null) return 'Sin categoría';
+  getCategoriaNombre(categoria: number | Categoria | null): string {
+    if (!categoria) return 'Sin categoría';
 
-    const categoria = this.categorias.find(cat => cat.id === categoriaId);
-    return categoria ? categoria.nombre : 'Sin categoría';
+    if (typeof categoria === 'object') return categoria.nombre;
+
+    const cat = this.categorias.find(c => c.id === categoria);
+    return cat ? cat.nombre : 'Sin categoría';
   }
+
 
 
 

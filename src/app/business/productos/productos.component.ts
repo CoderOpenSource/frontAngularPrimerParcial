@@ -15,6 +15,11 @@ interface Subcategoria {
   categoria: number;
 }
 
+interface Marca {
+  id: number;
+  nombre: string;
+}
+
 interface ImagenProducto {
   id?: number;
   imagen?: File;
@@ -31,9 +36,11 @@ interface Producto {
   codigo_barra: string;
   precio_unitario: number;
   unidad_medida: string;
-  subcategoria: number | null;
+  subcategoria: number | Subcategoria | null;
+  marca: number | Marca | null;
   estado: boolean;
   imagenes?: ImagenProducto[];
+  precio_compra: number;
 }
 
 @Component({
@@ -51,6 +58,10 @@ export class ProductoComponent implements OnInit {
 
   categorias: Categoria[] = [];
   subcategorias: Subcategoria[] = [];
+  marcas: Marca[] = [];
+  selectedMarca: number | null = null;
+  selectedCategoria: number | null = null;
+
 
   productos: Producto[] = [];
   filteredProductos: Producto[] = [];
@@ -63,6 +74,9 @@ export class ProductoComponent implements OnInit {
   showModal = false;
   showImagenesModal = false;
   isEditMode = false;
+  totalItems = 0;
+  hasNextPage = false;
+  hasPrevPage = false;
 
   searchTerm = '';
   currentPage = 1;
@@ -73,6 +87,7 @@ export class ProductoComponent implements OnInit {
   ngOnInit(): void {
     this.loadCategorias();
     this.loadSubcategorias();
+    this.loadMarcas();
     this.loadProductos();
   }
 
@@ -85,8 +100,10 @@ export class ProductoComponent implements OnInit {
       precio_unitario: 0,
       unidad_medida: '',
       subcategoria: null,
+      marca: null,
       estado: false,
-      imagenes: []
+      imagenes: [],
+      precio_compra: 0,
     };
   }
 
@@ -111,12 +128,35 @@ export class ProductoComponent implements OnInit {
     this.http.get<Subcategoria[]>('http://127.0.0.1:8000/api/subcategorias/').subscribe(data => this.subcategorias = data);
   }
 
-  loadProductos() {
+  loadMarcas() {
+    this.http.get<Marca[]>('http://127.0.0.1:8000/api/marcas/').subscribe(data => this.marcas = data);
+  }
+
+  getMarcaNombre(id: number | Marca | null): string {
+    if (!id) return 'Sin marca';
+    if (typeof id === 'object') return id.nombre;
+    const marca = this.marcas.find(m => m.id === id);
+    return marca ? marca.nombre : 'Sin marca';
+  }
+
+  getCategoriaNombre(sub: number | Subcategoria | null): string {
+    if (!sub) return 'Sin categoría';
+    const subId = typeof sub === 'object' ? sub.id : sub;
+    const subObj = this.subcategorias.find(s => s.id === subId);
+    const cat = this.categorias.find(c => c.id === subObj?.categoria);
+    return cat ? cat.nombre : 'Sin categoría';
+  }
+
+  loadProductos(page: number = 1) {
     this.isLoading = true;
-    this.http.get<Producto[]>('http://127.0.0.1:8000/api/productos/').subscribe({
+    this.http.get<any>(`http://127.0.0.1:8000/api/productos/?sin_stock=all&page=${page}`).subscribe({
       next: data => {
-        this.productos = data;
-        this.filteredProductos = data;
+        this.productos = data.results;
+        this.filteredProductos = data.results;
+        this.totalItems = data.count;
+        this.hasNextPage = !!data.next;
+        this.hasPrevPage = !!data.previous;
+        this.currentPage = page;
         this.isLoading = false;
       },
       error: error => {
@@ -128,25 +168,41 @@ export class ProductoComponent implements OnInit {
 
   filterProductos() {
     const term = this.searchTerm.toLowerCase();
-    this.filteredProductos = this.productos.filter(p => p.nombre.toLowerCase().includes(term));
+    this.filteredProductos = this.productos.filter(p => {
+      const nombreMatch = p.nombre.toLowerCase().includes(term);
+
+      const marcaMatch =
+        this.selectedMarca === null ||
+        (typeof p.marca === 'object' ? p.marca?.id : p.marca) === this.selectedMarca;
+
+      const categoriaMatch = (() => {
+        if (this.selectedCategoria === null) return true;
+        const subId = typeof p.subcategoria === 'object' ? p.subcategoria?.id : p.subcategoria;
+        const sub = this.subcategorias.find(s => s.id === subId);
+        return sub?.categoria === this.selectedCategoria;
+      })();
+
+      return nombreMatch && marcaMatch && categoriaMatch;
+    });
+
     this.currentPage = 1;
   }
 
-  paginatedProductos(): Producto[] {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    return this.filteredProductos.slice(start, start + this.itemsPerPage);
-  }
 
   totalPages(): number {
-    return Math.ceil(this.filteredProductos.length / this.itemsPerPage);
+    return Math.ceil(this.totalItems / this.itemsPerPage);
   }
 
   nextPage() {
-    if (this.currentPage < this.totalPages()) this.currentPage++;
+    if (this.hasNextPage) {
+      this.loadProductos(this.currentPage + 1);
+    }
   }
 
   prevPage() {
-    if (this.currentPage > 1) this.currentPage--;
+    if (this.hasPrevPage && this.currentPage > 1) {
+      this.loadProductos(this.currentPage - 1);
+    }
   }
 
   addProducto() {
@@ -158,13 +214,19 @@ export class ProductoComponent implements OnInit {
   }
 
   editProducto(producto: Producto) {
-    this.selectedProducto = { ...producto };
+    this.selectedProducto = {
+      ...producto,
+      subcategoria: typeof producto.subcategoria === 'object' ? producto.subcategoria?.id ?? null : producto.subcategoria,
+      marca: typeof producto.marca === 'object' ? producto.marca?.id ?? null : producto.marca
+    };
+
     this.imagenes = producto.imagenes?.map((img, index) => ({
       id: img.id,
       previewUrl: (img as any).imagen_url || (typeof img.imagen === 'string' ? img.imagen : ''),
       descripcion: img.descripcion || '',
       orden: img.orden ?? index
     })) || [];
+
     this.imagenesAEliminar = [];
     this.isEditMode = true;
     this.showModal = true;
@@ -200,14 +262,15 @@ export class ProductoComponent implements OnInit {
 
   saveProducto() {
     const formData = new FormData();
-
     formData.append('nombre', this.selectedProducto.nombre);
     formData.append('descripcion', this.selectedProducto.descripcion || '');
-    formData.append('codigo_barra', this.selectedProducto.codigo_barra);
     formData.append('precio_unitario', this.selectedProducto.precio_unitario.toString());
     formData.append('unidad_medida', this.selectedProducto.unidad_medida);
     formData.append('subcategoria', String(this.selectedProducto.subcategoria));
+    formData.append('marca', String(this.selectedProducto.marca));
     formData.append('estado', String(this.selectedProducto.estado));
+    formData.append('precio_compra', this.selectedProducto.precio_compra.toString());
+
 
     const imagenesMeta: { descripcion: string; orden: number; file_key: string }[] = [];
 
@@ -281,9 +344,11 @@ export class ProductoComponent implements OnInit {
     this.imagenesAEliminar = [];
   }
 
-  getSubcategoriaNombre(id: number | null): string {
-    const sub = this.subcategorias.find(s => s.id === id);
-    return sub ? sub.nombre : 'Sin subcategoría';
+  getSubcategoriaNombre(sub: number | Subcategoria | null): string {
+    if (!sub) return 'Sin subcategoría';
+    if (typeof sub === 'object') return sub.nombre;
+    const subObj = this.subcategorias.find(s => s.id === sub);
+    return subObj ? subObj.nombre : 'Sin subcategoría';
   }
 
   private handleHttpError(error: any) {

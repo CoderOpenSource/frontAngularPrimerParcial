@@ -17,6 +17,7 @@ export class SidebarComponent implements OnInit {
   isUsuariosOpen: boolean = false;
   isProductosOpen = false;
   isVentasOpen = false;
+  isReportesOpen = false;
 
   ngOnInit(): void {
     const userRole = localStorage.getItem('userRole');
